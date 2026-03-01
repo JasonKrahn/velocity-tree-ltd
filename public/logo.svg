@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="white">
+  <path d="M100 10 L190 200 L10 200 Z" fill="none" stroke="white" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M100 30 L85 70 L95 70 L75 105 L90 105 L60 145 L95 145 L95 160 L105 160 L105 145 L140 145 L110 105 L125 105 L105 70 L115 70 Z" fill="white"/>
+  <text x="100" y="178" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="28" text-anchor="middle" letter-spacing="1">VELOCITY</text>
+  <text x="100" y="193" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="9" text-anchor="middle" letter-spacing="2">LAND &amp; TREE SERVICES</text>
+</svg>
