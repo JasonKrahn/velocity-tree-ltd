@@ -22,7 +22,7 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Navigation */}
       <nav className="absolute top-0 w-full z-50 p-6 flex justify-between items-center text-white">
-        <Image src="/gallery/gallery-22.png" width={260} height={260} alt="Velocity LTS Logo" className="h-24 w-auto brightness-0 invert hover:opacity-80 transition-all" />
+        <Image src="/gallery/gallery-22.png" width={260} height={260} alt="Velocity Land and Tree Services Logo – Forestry Mulching and Land Clearing in Blumenort Manitoba" className="h-24 w-auto brightness-0 invert hover:opacity-80 transition-all" />
         <div className="hidden md:flex gap-8 text-sm font-medium">
           <a href="#services" className="hover:text-orange-400 transition-colors">Services</a>
           <a href="#about" className="hover:text-orange-400 transition-colors">About</a>
@@ -55,7 +55,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="mt-6 text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto"
           >
-            Expert land clearing, forestry mulching, grading, and certified septic installation for farms, developers, and rural homeowners in Manitoba.
+            Expert forestry mulching, lot clearing, land management, driveway installs, and certified septic installation for farms, developers, and rural homeowners in Blumenort and southeast Manitoba.
           </motion.p>
 
           <motion.div
@@ -109,7 +109,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-white mb-3">Farms & Acreage</h3>
               <p className="text-orange-400 font-semibold mb-4 text-sm uppercase tracking-wider">Forestry Mulching</p>
               <p className="text-neutral-400 leading-relaxed">
-                Reclaim your acreage. Professional forestry mulching and brush clearing that turns overgrown land into usable space—without the burn piles.
+                Reclaim your acreage with eco-friendly forestry mulching in Manitoba. Professional brush clearing, overgrowth management, and land reclamation that turns overgrown land into usable space—without burn piles or hauling.
               </p>
             </div>
 
@@ -121,9 +121,9 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Developers</h3>
-              <p className="text-orange-400 font-semibold mb-4 text-sm uppercase tracking-wider">Site Development & Clearing</p>
+              <p className="text-orange-400 font-semibold mb-4 text-sm uppercase tracking-wider">Lot Clearing & Site Development</p>
               <p className="text-neutral-400 leading-relaxed">
-                Clear the way for success. From raw land to a ready-to-build site. We handle heavy clearing, subdivision grading, and expert septic design.
+                Clear the way for success. From raw land to a build-ready site in Manitoba. We handle lot clearing, land management, subdivision grading, fence line clearing, and right-of-way management.
               </p>
             </div>
 
@@ -135,9 +135,9 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Home Owners</h3>
-              <p className="text-orange-400 font-semibold mb-4 text-sm uppercase tracking-wider">Driveways & Septic Installs</p>
+              <p className="text-orange-400 font-semibold mb-4 text-sm uppercase tracking-wider">Culvert, Driveway & Septic Installs</p>
               <p className="text-neutral-400 leading-relaxed">
-                Your property, perfected. Whether you need an expertly graded gravel driveway or a fully licensed septic system installation for your rural home.
+                Your property, perfected. Expert culvert installation, gravel driveway grading, and certified septic system design and installation for rural Manitoba homes, farms, and commercial properties.
               </p>
             </div>
           </div>
@@ -166,7 +166,7 @@ export default function Home() {
             </h2>
             <div className="space-y-6 text-neutral-400 text-lg leading-relaxed">
               <p>
-                Based in Steinbach, Manitoba, Velocity Land & Tree Services isn't your average dirt-moving company. We bring technical precision, deep industry knowledge, and heavy-duty capabilities to every job site.
+                Based in Blumenort, Manitoba, Velocity Land & Tree Services isn't your average dirt-moving company. We bring technical precision, deep industry knowledge, and heavy-duty capabilities to every job site across southeast Manitoba.
               </p>
               <div className="bg-neutral-800/80 p-6 rounded-sm border-l-4 border-orange-500">
                 <h4 className="text-white font-bold text-xl mb-4">Certified Professionals</h4>
@@ -272,12 +272,65 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 bg-brand-dark">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight text-white mb-4">
+              Frequently <span className="text-orange-500">Asked</span>
+            </h2>
+            <p className="text-neutral-400 max-w-2xl mx-auto text-lg">
+              Common questions about our forestry mulching, land clearing, and septic installation services in Manitoba.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "What is forestry mulching and how does it work?",
+                a: "Forestry mulching is an eco-friendly land clearing method that uses a single machine to cut, grind, and clear trees, brush, and vegetation in one pass. Unlike traditional clearing, there are no burn piles, no hauling, and the mulched material returns nutrients to the soil. Velocity Land & Tree Services provides professional forestry mulching across southeast Manitoba."
+              },
+              {
+                q: "How much does forestry mulching cost per acre in Manitoba?",
+                a: "Forestry mulching costs in Manitoba vary based on terrain, vegetation density, and accessibility. Light brush clearing is more affordable than heavy timber work. Contact us at (204) 226-7174 for a free estimate on your specific project in the Blumenort and southeast Manitoba area."
+              },
+              {
+                q: "Do I need a permit for septic installation in Manitoba?",
+                a: "Yes, septic system installations in Manitoba require permits and must comply with provincial regulations. As a certified septic expert, we handle the full process including soil testing, system design, permitting, and installation for residential and commercial properties."
+              },
+              {
+                q: "What areas do you serve in Manitoba?",
+                a: "We are based in Blumenort, Manitoba and serve all of southeast Manitoba including Steinbach, Niverville, Ste. Anne, Saint Malo, the RM of Hanover, and surrounding communities. We provide forestry mulching, lot clearing, driveway installs, and septic services across the region."
+              },
+              {
+                q: "What is the difference between forestry mulching and traditional land clearing?",
+                a: "Traditional land clearing requires multiple machines, creates debris piles for burning or hauling, and can cause soil erosion. Forestry mulching does everything in one pass—cutting, grinding, and spreading material as ground cover. It's faster, more environmentally friendly, prevents erosion, and costs less."
+              },
+              {
+                q: "Can you clear fence lines and property boundaries?",
+                a: "Yes, fence line clearing and property line management are core services. Our forestry mulching equipment can clear overgrown fence lines, rights-of-way, and property boundaries efficiently without damaging existing fences or structures."
+              },
+            ].map((faq, idx) => (
+              <details key={idx} className="group bg-neutral-800/50 border border-neutral-700 rounded-sm">
+                <summary className="flex items-center justify-between cursor-pointer p-6 text-white font-semibold text-lg hover:text-orange-400 transition-colors">
+                  {faq.q}
+                  <ChevronDown className="w-5 h-5 text-orange-500 group-open:rotate-180 transition-transform flex-shrink-0 ml-4" />
+                </summary>
+                <div className="px-6 pb-6 text-neutral-400 leading-relaxed border-t border-neutral-700 pt-4">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-neutral-950 py-12 border-t border-neutral-800">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <Image src="/gallery/gallery-22.png" width={140} height={140} alt="Velocity LTS Logo" className="h-16 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-all" />
+          <Image src="/gallery/gallery-22.png" width={140} height={140} alt="Velocity Land and Tree Services – Forestry Mulching and Land Clearing in Blumenort Manitoba" className="h-16 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-all" />
           <div className="text-neutral-500 text-sm">
-            © {new Date().getFullYear()} Velocity Land & Tree Services. All rights reserved. <br className="md:hidden" /> Steinbach, Manitoba.
+            © {new Date().getFullYear()} Velocity Land & Tree Services. All rights reserved. <br className="md:hidden" /> Blumenort, Manitoba. <span className="block mt-1 text-neutral-600 text-xs">Serving Steinbach, Niverville, Ste. Anne, Saint Malo & all of southeast Manitoba.</span>
           </div>
         </div>
       </footer>
