@@ -45,7 +45,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
     }, [isDragging]);
 
     return (
-        <div className="w-full max-w-5xl mx-auto px-6 py-24">
+        <div className="w-full max-w-2xl mx-auto px-6 py-24">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight text-white mb-4">
                     See The <span className="text-orange-500">Transformation</span>
@@ -57,7 +57,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
 
             <div
                 ref={containerRef}
-                className="relative w-full aspect-video rounded-sm overflow-hidden select-none border-2 border-neutral-800 cursor-ew-resize"
+                className="relative w-full aspect-[3/4] rounded-sm overflow-hidden select-none border-2 border-neutral-800 cursor-ew-resize"
                 onMouseMove={handleMouseMove}
                 onMouseDown={(e) => { setIsDragging(true); handleMove(e.clientX); }}
                 onTouchMove={handleTouchMove}
@@ -79,7 +79,7 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
 
                 {/* Before Image (Foreground, clipped) */}
                 <div
-                    className="absolute inset-0 w-full h-full border-r-4 border-white pointer-events-none"
+                    className="absolute inset-0 w-full h-full pointer-events-none"
                     style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
                 >
                     <Image
@@ -94,13 +94,13 @@ export default function BeforeAfterSlider({ beforeImage, afterImage }: BeforeAft
                     </div>
                 </div>
 
-                {/* Slider Handle */}
+                {/* Slider Handle & Line */}
                 <div
-                    className="absolute top-0 bottom-0 w-2 cursor-ew-resize flex items-center justify-center -ml-1"
-                    style={{ left: `${sliderPosition}%` }}
+                    className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize flex items-center justify-center z-30"
+                    style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
                 >
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-800"><path d="m9 18-6-6 6-6" /><path d="m15 6 6 6-6 6" /></svg>
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.4)] border-2 border-orange-500 text-orange-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18-6-6 6-6" /><path d="m15 6 6 6-6 6" /></svg>
                     </div>
                 </div>
             </div>
