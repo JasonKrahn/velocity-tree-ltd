@@ -97,7 +97,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-neutral-900/70 z-10" />
 
         {/* Hero Background */}
-        <div className="absolute inset-0 bg-[url('/gallery/gallery-14.png')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/gallery/gallery-14.png')] bg-cover bg-[position:calc(50%+250px)_center] md:bg-center" />
 
         <div className="relative z-20 text-center px-4 max-w-5xl mx-auto mt-16">
           <motion.h1
