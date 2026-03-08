@@ -97,7 +97,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-neutral-900/70 z-10" />
 
         {/* Hero Background */}
-        <div className="absolute inset-0 bg-[url('/gallery/gallery-14.png')] bg-cover bg-[position:calc(50%+250px)_center] md:bg-center" />
+        <div className="absolute inset-0 bg-[url('/gallery/gallery-14.png')] bg-cover bg-[position:65%_center] md:bg-center bg-no-repeat" />
 
         <div className="relative z-20 text-center px-4 max-w-5xl mx-auto mt-16">
           <motion.h1
@@ -110,12 +110,12 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="mt-6 text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-lg md:text-2xl text-neutral-300 font-medium mb-10 max-w-3xl mx-auto leading-relaxed"
           >
-            Expert forestry mulching, lot clearing, land management, driveway installs, and certified septic installation for farms, developers, and rural homeowners in Blumenort and southeast Manitoba.
+            Professional land preparation and site development. From eco-friendly brush clearing to certified septic installations, we help farms, developers, and homeowners throughout southeast Manitoba bring their projects to life.
           </motion.p>
 
           <motion.div
@@ -140,7 +140,7 @@ export default function Home() {
           transition={{ duration: 1, delay: 1 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce"
         >
-          <a href="#services" className="text-white/70 hover:text-white transition-colors">
+          <a href="#services" className="text-white/70 hover:text-white transition-colors" aria-label="Scroll to services">
             <ChevronDown className="w-8 h-8" />
           </a>
         </motion.div>
@@ -229,7 +229,7 @@ export default function Home() {
                 Based in Blumenort, Manitoba, Velocity Land & Tree Services isn't your average dirt-moving company. We bring technical precision, deep industry knowledge, and heavy-duty capabilities to every job site across southeast Manitoba.
               </p>
               <div className="bg-neutral-800/80 p-6 rounded-sm border-l-4 border-orange-500">
-                <h4 className="text-white font-bold text-xl mb-4">Certified Professionals</h4>
+                <h3 className="text-white font-bold text-xl mb-4">Certified Professionals</h3>
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -374,8 +374,8 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="text-neutral-500 text-sm text-center md:text-right">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved. <br className="md:hidden" /> {siteConfig.address.locality}, {siteConfig.address.region}. <span className="block mt-1 text-neutral-600 text-xs">Serving Steinbach, Niverville, Ste. Anne, Saint Malo & all of southeast Manitoba.</span>
+          <div className="text-neutral-400 text-sm text-center md:text-right">
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved. <br className="md:hidden" /> {siteConfig.address.locality}, {siteConfig.address.region}. <span className="block mt-1 text-neutral-500 text-xs">Serving Steinbach, Niverville, Ste. Anne, Saint Malo & all of southeast Manitoba.</span>
           </div>
         </div>
       </footer>
