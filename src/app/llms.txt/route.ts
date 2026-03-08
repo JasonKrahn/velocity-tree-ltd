@@ -1,6 +1,6 @@
 import { siteConfig } from "@/lib/config";
 
-export default function LlmContext() {
+export async function GET() {
   const content = `
 # Velocity Land & Tree Services - AI Context
 
