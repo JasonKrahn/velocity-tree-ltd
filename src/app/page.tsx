@@ -1,14 +1,23 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown, X, Facebook, Instagram } from "lucide-react";
+import { ArrowRight, ChevronDown, X, Facebook, Instagram, Menu } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import { siteConfig } from "@/lib/config";
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMobileMenuOpen]);
 
   const galleryImages = [
     "/gallery/gallery-1.png",
@@ -23,7 +32,18 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Navigation */}
       <nav className="absolute top-0 w-full z-50 p-6 flex justify-between items-center text-white">
-        <Image src="/gallery/gallery-22.png" width={260} height={260} alt={siteConfig.name + " Logo – Forestry Mulching and Land Clearing in Blumenort Manitoba"} className="h-24 w-auto brightness-0 invert hover:opacity-80 transition-all" />
+        <Image src="/gallery/Velocity_logo.png" width={260} height={260} alt={siteConfig.name + " Logo – Forestry Mulching and Land Clearing in Blumenort Manitoba"} className="h-24 w-auto brightness-0 invert hover:opacity-80 transition-all" />
+        
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden p-2 text-white hover:text-orange-500 transition-colors z-50 relative"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+        </button>
+
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <a href="#services" className="hover:text-orange-400 transition-colors">Services</a>
           <a href="#about" className="hover:text-orange-400 transition-colors">About</a>
@@ -40,6 +60,36 @@ export default function Home() {
           <a href="#contact" className="px-5 py-2 bg-orange-600 hover:bg-orange-500 rounded-sm text-white transition-all">Contact Us</a>
         </div>
       </nav>
+
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-neutral-950/95 backdrop-blur-md pt-32 px-6 md:hidden flex flex-col items-center gap-8 text-xl font-medium"
+          >
+            <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-orange-400 transition-colors text-white">Services</a>
+            <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-orange-400 transition-colors text-white">About</a>
+            <a href="#gallery" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-orange-400 transition-colors text-white">Gallery</a>
+            <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-orange-400 transition-colors text-white">FAQ</a>
+            
+            <div className="flex items-center gap-6 mt-4">
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-orange-500 transition-colors" aria-label="Facebook">
+                <Facebook className="w-8 h-8" />
+              </a>
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-orange-500 transition-colors" aria-label="Instagram">
+                <Instagram className="w-8 h-8" />
+              </a>
+            </div>
+            
+            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="mt-4 px-8 py-4 bg-orange-600 hover:bg-orange-500 rounded-sm text-white transition-all w-full text-center">
+              Contact Us
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -314,7 +364,7 @@ export default function Home() {
       <footer className="bg-neutral-950 py-12 border-t border-neutral-800">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
           <div className="flex flex-col items-center md:items-start gap-6">
-            <Image src="/gallery/gallery-22.png" width={220} height={80} alt={siteConfig.name + " – Forestry Mulching and Land Clearing in Blumenort Manitoba"} className="h-12 w-auto object-contain hover:opacity-80 transition-opacity" />
+            <Image src="/gallery/Velocity_logo.png" width={220} height={80} alt={siteConfig.name + " – Forestry Mulching and Land Clearing in Blumenort Manitoba"} className="h-12 w-auto object-contain hover:opacity-80 transition-opacity" />
             <div className="flex gap-4">
               <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-orange-500 transition-colors" aria-label="Facebook">
                 <Facebook className="w-6 h-6" />

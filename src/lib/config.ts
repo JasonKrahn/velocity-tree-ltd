@@ -2,7 +2,7 @@ export const siteConfig = {
     name: "Velocity Land & Tree Services",
     url: "https://www.velocitylts.com",
     ogImage: "https://www.velocitylts.com/gallery/gallery-14.png",
-    logo: "https://www.velocitylts.com/gallery/gallery-22.png",
+    logo: "https://www.velocitylts.com/gallery/Velocity_logo.png",
     phone: "+1-204-226-7174",
     phoneFormatted: "(204) 226-7174",
     address: {
