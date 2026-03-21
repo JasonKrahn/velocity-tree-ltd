@@ -411,22 +411,26 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">First & Last Name</label>
-                <input type="text" id="name" name="name" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="John Doe" />
+                <input type="text" id="name" name="name" required autoComplete="name" className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="John Doe" />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Email Address</label>
+                <input type="email" id="email" name="email" required autoComplete="email" className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="john@example.com" />
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="(204) 555-0123" />
+                <input type="tel" id="phone" name="phone" required autoComplete="tel" className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="(204) 555-0123" />
               </div>
-            </div>
-            <div>
-              <label htmlFor="service" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Service Interested In</label>
-              <select id="service" name="service" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors appearance-none">
-                <option>Forestry Mulching & Land Clearing</option>
-                <option>Site Development & Grading</option>
-                <option>Septic Installation / Design</option>
-                <option>Driveway Installation</option>
-                <option>Other / Not Sure</option>
-              </select>
+              <div>
+                <label htmlFor="service" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Service Interested In</label>
+                <select id="service" name="service" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors appearance-none">
+                  <option>Forestry Mulching & Land Clearing</option>
+                  <option>Site Development & Grading</option>
+                  <option>Septic Installation / Design</option>
+                  <option>Driveway Installation</option>
+                  <option>Other / Not Sure</option>
+                </select>
+              </div>
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Project Details</label>
