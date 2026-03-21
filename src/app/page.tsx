@@ -3,13 +3,57 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown, X, Facebook, Instagram, Menu } from "lucide-react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import { siteConfig } from "@/lib/config";
 
+type InstagramGalleryItem = {
+  id: string;
+  fileName: string;
+  caption: string;
+  permalink: string;
+  shortcode: string;
+  takenAt: number | null;
+};
+
+type ContactFormStatus = "idle" | "submitting" | "success" | "error";
+
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<InstagramGalleryItem | null>(null);
+  const [instagramImages, setInstagramImages] = useState<InstagramGalleryItem[]>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [contactFormStatus, setContactFormStatus] = useState<ContactFormStatus>("idle");
+
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setContactFormStatus("submitting");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const encodedData = new URLSearchParams();
+
+    for (const [key, value] of formData.entries()) {
+      encodedData.append(key, String(value));
+    }
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodedData.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      form.reset();
+      setContactFormStatus("success");
+    } catch (error) {
+      console.error(error);
+      setContactFormStatus("error");
+    }
+  }
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -19,14 +63,37 @@ export default function Home() {
     }
   }, [isMobileMenuOpen]);
 
-  const galleryImages = [
-    "/gallery/gallery-1.png",
-    "/gallery/gallery-3.png",
-    "/gallery/gallery-5.png",
-    "/gallery/gallery-10.png",
-    "/gallery/gallery-14.png",
-    "/gallery/gallery-20.png"
-  ];
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadInstagramImages() {
+      try {
+        const response = await fetch("/gallery/instagram/instagram_captions.json", {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not load Instagram gallery metadata");
+        }
+
+        const data = (await response.json()) as InstagramGalleryItem[];
+        if (isMounted && Array.isArray(data)) {
+          setInstagramImages(data);
+        }
+      } catch (error) {
+        console.error(error);
+        if (isMounted) {
+          setInstagramImages([]);
+        }
+      }
+    }
+
+    loadInstagramImages();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <main className="min-h-screen">
@@ -269,15 +336,15 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryImages.map((src, idx) => (
+            {instagramImages.map((image) => (
               <div
-                key={idx}
-                onClick={() => setSelectedImage(src)}
+                key={image.id}
+                onClick={() => setSelectedImage(image)}
                 className="relative h-64 border-2 border-neutral-800 hover:border-orange-500 transition-colors overflow-hidden cursor-pointer"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center hover:scale-105 transition-transform duration-500"
-                  style={{ backgroundImage: `url(${src})` }}
+                  style={{ backgroundImage: `url(/gallery/instagram/${image.fileName})` }}
                 />
               </div>
             ))}
@@ -327,20 +394,33 @@ export default function Home() {
             Get in touch today for a free estimate on your land clearing, grading, or septic project.
           </p>
 
-          <form className="bg-neutral-800/80 p-8 border-l-4 border-b-4 border-orange-500 shadow-xl max-w-2xl mx-auto text-left flex flex-col gap-6">
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onSubmit={handleContactSubmit}
+            className="bg-neutral-800/80 p-8 border-l-4 border-b-4 border-orange-500 shadow-xl max-w-2xl mx-auto text-left flex flex-col gap-6"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>
+                Do not fill this out if you are human: <input name="bot-field" />
+              </label>
+            </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">First & Last Name</label>
-                <input type="text" id="name" className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="John Doe" />
+                <input type="text" id="name" name="name" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="John Doe" />
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Phone Number</label>
-                <input type="tel" id="phone" className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="(204) 555-0123" />
+                <input type="tel" id="phone" name="phone" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="(204) 555-0123" />
               </div>
             </div>
             <div>
               <label htmlFor="service" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Service Interested In</label>
-              <select id="service" className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors appearance-none">
+              <select id="service" name="service" required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors appearance-none">
                 <option>Forestry Mulching & Land Clearing</option>
                 <option>Site Development & Grading</option>
                 <option>Septic Installation / Design</option>
@@ -350,12 +430,26 @@ export default function Home() {
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-neutral-400 mb-2 uppercase tracking-wide">Project Details</label>
-              <textarea id="message" rows={4} className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="Tell us about your project..."></textarea>
+              <textarea id="message" name="message" rows={4} required className="w-full bg-neutral-900 border border-neutral-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="Tell us about your project..."></textarea>
             </div>
-            <button type="button" className="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-lg py-4 rounded-sm mt-2 transition-all hover:shadow-[0_0_20px_rgba(2ea,88,12,0.4)] flex justify-center items-center gap-2">
-              Get in Contact
+            <button
+              type="submit"
+              disabled={contactFormStatus === "submitting"}
+              className="w-full bg-orange-600 hover:bg-orange-500 disabled:bg-orange-600/60 text-white font-bold text-lg py-4 rounded-sm mt-2 transition-all hover:shadow-[0_0_20px_rgba(2ea,88,12,0.4)] flex justify-center items-center gap-2"
+            >
+              {contactFormStatus === "submitting" ? "Sending..." : "Get in Contact"}
               <ArrowRight className="w-5 h-5" />
             </button>
+            {contactFormStatus === "success" && (
+              <p className="text-green-400 text-sm" role="status">
+                Thanks! We received your request and will get back to you soon.
+              </p>
+            )}
+            {contactFormStatus === "error" && (
+              <p className="text-red-400 text-sm" role="alert">
+                Something went wrong while sending your request. Please try again.
+              </p>
+            )}
           </form>
         </div>
       </section>
@@ -390,7 +484,11 @@ export default function Home() {
             onClick={() => setSelectedImage(null)}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-pointer"
           >
-            <button className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+            <button
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+              onClick={() => setSelectedImage(null)}
+              aria-label="Close image modal"
+            >
               <X className="w-10 h-10" />
             </button>
             <motion.div
@@ -398,9 +496,30 @@ export default function Home() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-5xl w-full aspect-video border border-neutral-800 shadow-2xl overflow-hidden rounded-sm cursor-default"
+              className="relative max-w-5xl w-full border border-neutral-800 shadow-2xl overflow-hidden rounded-sm cursor-default bg-black"
             >
-              <Image src={selectedImage} alt="Gallery Expanded" fill className="object-contain bg-black" />
+              <div className="relative w-full aspect-video">
+                <Image
+                  src={`/gallery/instagram/${selectedImage.fileName}`}
+                  alt={`Instagram post ${selectedImage.id}`}
+                  fill
+                  className="object-contain bg-black"
+                />
+              </div>
+              <div className="px-5 py-4 border-t border-neutral-800 bg-neutral-950">
+                <p className="text-neutral-300 text-sm md:text-base leading-relaxed">
+                  {selectedImage.caption || "View this recent post from our Instagram gallery."}{" "}
+                  <a
+                    href={selectedImage.permalink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open this image on Instagram"
+                    className="inline-flex align-middle text-neutral-400 hover:text-orange-500 transition-colors"
+                  >
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}

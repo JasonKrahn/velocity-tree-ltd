@@ -145,6 +145,24 @@ Strategies for surfacing in ChatGPT, Gemini, Perplexity, and Google AI Overviews
 
 ---
 
+## Instagram Gallery Sync
+
+The website features an automated Instagram gallery populated directly from the `@velocitylandtreeservice` profile, without requiring an official Instagram API key. 
+
+### Update Script
+The repository includes a custom Node.js script `tools/download-instagram-gallery.js` which fetches the latest public posts.
+
+- **Operation:** Run `node tools/download-instagram-gallery.js` from the command line.
+- **Output:** It downloads the 9 most recent images and saves them into the `public/gallery/instagram/` directory.
+- **Metadata:** It extracts captions, shortcodes, and permalinks, writing them to a JSON file at `public/gallery/instagram/instagram_captions.json`.
+
+### Frontend Implementation
+- The homepage (`src/app/page.tsx`) uses a `useEffect` hook to asynchronously load the `instagram_captions.json` metadata at runtime (bypassing caching).
+- The Gallery section maps over these items, displaying them in a responsive CSS grid (`bg-cover` over custom div elements).
+- Clicking an image opens a full-screen animated modal (powered by Framer Motion) displaying the image, the extracted Instagram caption, and a direct link to the original Instagram post.
+
+---
+
 ## Social Links
 
 - **Instagram:** https://www.instagram.com/velocitylandtreeservice/

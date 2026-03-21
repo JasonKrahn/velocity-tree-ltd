@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Netlify Form Detection</title>
+  </head>
+  <body>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <p hidden>
+        <label>
+          Don't fill this out if you're human: <input name="bot-field" />
+        </label>
+      </p>
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <select name="service">
+        <option>Forestry Mulching &amp; Land Clearing</option>
+        <option>Site Development &amp; Grading</option>
+        <option>Septic Installation / Design</option>
+        <option>Driveway Installation</option>
+        <option>Other / Not Sure</option>
+      </select>
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "download:instagram": "node tools/download-instagram-gallery.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
