@@ -95,6 +95,27 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage || instagramImages.length === 0) return;
+      const currentIndex = instagramImages.findIndex((img) => img.id === selectedImage.id);
+      if (currentIndex === -1) return;
+
+      if (e.key === "ArrowLeft") {
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : instagramImages.length - 1;
+        setSelectedImage(instagramImages[prevIndex]);
+      } else if (e.key === "ArrowRight") {
+        const nextIndex = currentIndex < instagramImages.length - 1 ? currentIndex + 1 : 0;
+        setSelectedImage(instagramImages[nextIndex]);
+      } else if (e.key === "Escape") {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedImage, instagramImages]);
+
   return (
     <main className="min-h-screen">
       {/* Navigation */}
@@ -340,7 +361,7 @@ export default function Home() {
               <div
                 key={image.id}
                 onClick={() => setSelectedImage(image)}
-                className="relative h-64 border-2 border-neutral-800 hover:border-orange-500 transition-colors overflow-hidden cursor-pointer"
+                className="relative aspect-square border-2 border-neutral-800 hover:border-orange-500 transition-colors overflow-hidden cursor-pointer"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center hover:scale-105 transition-transform duration-500"
@@ -508,6 +529,24 @@ export default function Home() {
                   alt={`Instagram post ${selectedImage.id}`}
                   fill
                   className="object-contain bg-black"
+                />
+                <div 
+                  className="absolute left-0 top-0 bottom-0 w-1/2 cursor-w-resize" 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const currentIndex = instagramImages.findIndex((img) => img.id === selectedImage.id);
+                    const prevIndex = currentIndex > 0 ? currentIndex - 1 : instagramImages.length - 1;
+                    setSelectedImage(instagramImages[prevIndex]);
+                  }}
+                />
+                <div 
+                  className="absolute right-0 top-0 bottom-0 w-1/2 cursor-e-resize" 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const currentIndex = instagramImages.findIndex((img) => img.id === selectedImage.id);
+                    const nextIndex = currentIndex < instagramImages.length - 1 ? currentIndex + 1 : 0;
+                    setSelectedImage(instagramImages[nextIndex]);
+                  }}
                 />
               </div>
               <div className="px-5 py-4 border-t border-neutral-800 bg-neutral-950">
